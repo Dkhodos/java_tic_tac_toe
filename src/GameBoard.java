@@ -23,7 +23,10 @@ class GameBoard {
     public String toString() {
         StringBuilder boardText = new StringBuilder();
         for (BoardNode[] row : board) {
-            boardText.append(String.join(NODE_SEPARATOR, (CharSequence[]) row));
+            String[] rowSymbols = Arrays.stream(row)
+                    .map(BoardNode::getSymbol)
+                    .toArray(String[]::new);
+            boardText.append(String.join(NODE_SEPARATOR, rowSymbols));
             boardText.append(ROW_SEPARATOR);
         }
         return boardText.toString();

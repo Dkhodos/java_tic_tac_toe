@@ -1,0 +1,156 @@
+### Main: Starting Tic Tac Toe Game ###
+GameExecutor: Your turn!
+choose row (0-3)
+1
+choose column (0-3)
+1
+GameExecutor: Board:
+_ _ _ _
+_ X _ _
+_ _ _ _
+_ _ _ _
+
+GameExecutor: AI plays...
+AiPlayer: Doing random move
+GameExecutor: Board:
+_ _ _ _
+_ X _ _
+_ _ O _
+_ _ _ _
+
+GameExecutor: Your turn!
+choose row (0-3)
+0
+choose column (0-3)
+0
+GameExecutor: Board:
+X _ _ _
+_ X _ _
+_ _ O _
+_ _ _ _
+
+GameExecutor: AI plays...
+AiPlayer: Doing best move
+GameExecutor: Board:
+X O _ _
+_ X _ _
+_ _ O _
+_ _ _ _
+
+GameExecutor: Your turn!
+choose row (0-3)
+3
+choose column (0-3)
+3
+GameExecutor: Board:
+X O _ _
+_ X _ _
+_ _ O _
+_ _ _ X
+
+GameExecutor: AI plays...
+AiPlayer: Doing best move
+GameExecutor: Board:
+X O O _
+_ X _ _
+_ _ O _
+_ _ _ X
+
+GameExecutor: Your turn!
+choose row (0-3)
+3
+choose column (0-3)
+0
+GameExecutor: Board:
+X O O _
+_ X _ _
+_ _ O _
+X _ _ X
+
+GameExecutor: AI plays...
+AiPlayer: Doing best move
+GameExecutor: Board:
+X O O O
+_ X _ _
+_ _ O _
+X _ _ X
+
+GameExecutor: Your turn!
+choose row (0-3)
+3
+choose column (0-3)
+2
+GameExecutor: Board:
+X O O O
+_ X _ _
+_ _ O _
+X _ X X
+
+GameExecutor: AI plays...
+AiPlayer: Doing best move
+GameExecutor: Board:
+X O O O
+_ X _ _
+_ _ O _
+X O X X
+
+GameExecutor: Your turn!
+choose row (0-3)
+2
+choose column (0-3)
+0
+GameExecutor: Board:
+X O O O
+_ X _ _
+X _ O _
+X O X X
+
+GameExecutor: AI plays...
+AiPlayer: Doing best move
+GameExecutor: Board:
+X O O O
+O X _ _
+X _ O _
+X O X X
+
+GameExecutor: Your turn!
+choose row (0-3)
+1
+choose column (0-3)
+2
+GameExecutor: Board:
+X O O O
+O X X _
+X _ O _
+X O X X
+
+GameExecutor: AI plays...
+AiPlayer: Doing best move
+GameExecutor: Board:
+X O O O
+O X X O
+X _ O _
+X O X X
+
+GameExecutor: Your turn!
+choose row (0-3)
+2
+choose column (0-3)
+1
+GameExecutor: Board:
+X O O O
+O X X O
+X X O _
+X O X X
+
+GameExecutor: AI plays...
+AiPlayer: Doing best move
+GameExecutor: Board:
+X O O O
+O X X O
+X X O O
+X O X X
+
+### Main: Tic Tac Toe Game Finished, results: ###
+TicTacToeResult: It's a draw!
+TicTacToeResult: number of visited nodes: 633663
