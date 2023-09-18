@@ -1,7 +1,8 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -11,13 +12,13 @@ public class TicTacToeRuleTest {
 
     private TicTacToeRule rule;
     private BoardNode[][] board;
-    private HashSet<BoardNode> emptyNodes;
+    private List<BoardNode> emptyNodes;
 
     @BeforeEach
     public void setUp() {
         rule = new TicTacToeRule();
         board = new BoardNode[BOARD_SIZE][BOARD_SIZE];
-        emptyNodes = new HashSet<>();
+        emptyNodes = new ArrayList<>();
 
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {

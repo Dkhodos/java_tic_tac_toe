@@ -21,17 +21,17 @@ public class GameExecutor {
             printTurn();
 
             /* 3. execute turn according to player */
-            playByTurn();
+            BoardNode node = playByTurn();
 
             /* 4. print current board status */
             printBoard();
 
             /* 5. calculate game result */
-            result = board.getGameResult();
+            result = board.getGameResult(node);
         }
 
         /* 6. return results */
-        return new TicTacToeResult(result, 56494);
+        return new TicTacToeResult(result, currentPlayer.getAIVisitedNodeCount());
     }
 
     private void setTurn(){
@@ -46,8 +46,8 @@ public class GameExecutor {
         logger.info(currentPlayer.getTurnString(playerTurn));
     }
 
-    private void playByTurn(){
-        currentPlayer.movePlayer(playerTurn);
+    private BoardNode playByTurn(){
+        return currentPlayer.movePlayer(playerTurn);
     }
 
     private void printBoard(){

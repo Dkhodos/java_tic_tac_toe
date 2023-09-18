@@ -1,18 +1,22 @@
 public class TicTacToePlayerFactory {
-    private final TicTacToePlayer userPlayer;
-    private final TicTacToePlayer aiPlayer;
+    private final UserPlayer userPlayer;
+    private final AiPlayer aiPlayer;
 
     public TicTacToePlayerFactory(UserPlayer userPlayer, AiPlayer aiPlayer) {
         this.userPlayer = userPlayer;
         this.aiPlayer = aiPlayer;
     }
 
-    public void movePlayer(BoardPlayer playerTurn) {
-        getPlayer(playerTurn).doMove();
+    public BoardNode movePlayer(BoardPlayer playerTurn) {
+        return getPlayer(playerTurn).doMove();
     }
 
     public String getTurnString(BoardPlayer playerTurn){
         return playerTurn == BoardPlayer.USER ? "Your turn!" : "AI plays...";
+    }
+
+    public int getAIVisitedNodeCount(){
+        return aiPlayer.getVisitedNodesCount();
     }
 
     private TicTacToePlayer getPlayer(BoardPlayer playerTurn){

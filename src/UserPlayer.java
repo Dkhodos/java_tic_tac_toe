@@ -10,8 +10,8 @@ public class UserPlayer extends TicTacToePlayer{
     }
 
     @Override
-    public void doMove() {
-        int bound = gameBoard.size() - 1;
+    public BoardNode doMove() {
+        int bound = Settings.BOARD_SIZE - 1;
 
         while (true){
             System.out.printf((GET_X_PROMPT_TEMPLATE) + "%n", bound);
@@ -20,12 +20,11 @@ public class UserPlayer extends TicTacToePlayer{
             System.out.printf((GET_Y_PROMPT_TEMPLATE) + "%n", bound);
             int y = scanner.nextInt();
 
-            if(gameBoard.doMove(x, y, BoardPlayer.USER)){
-                return;
+            if(gameBoard.isNodeEmpty(x, y)){
+                return gameBoard.makeMove(x, y, BoardPlayer.USER);
             }
 
-            System.out.println("Invalid move, this is already occupied!");
+            System.out.println("Invalid move, this is area already occupied!");
         }
-
     }
 }

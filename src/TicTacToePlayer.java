@@ -5,5 +5,5 @@ abstract class TicTacToePlayer {
         this.gameBoard = gameBoard;
     }
 
-    abstract public void doMove();
+    abstract public BoardNode doMove();
 }

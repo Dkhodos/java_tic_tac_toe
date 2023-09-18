@@ -29,12 +29,12 @@ public class BoardNode{
         return player;
     }
 
-    public boolean setState(BoardPlayer state){
-        if(isEmpty()){
-            this.player = state;
-            return true;
-        }
-        return false;
+    public void setState(BoardPlayer state){
+        this.player = state;
+    }
+
+    public void clear(){
+        player = BoardPlayer.EMPTY;
     }
 
     @Override
