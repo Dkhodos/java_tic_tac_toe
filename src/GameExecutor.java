@@ -9,7 +9,7 @@ public class GameExecutor {
 
     public GameExecutor(){
         board = new GameBoard();
-        currentPlayer = new TicTacToePlayerFactory(board);
+        currentPlayer = new TicTacToePlayerFactory(new UserPlayer(board), new AiPlayer(board));
     }
 
     public TicTacToeResult play(){
@@ -17,10 +17,10 @@ public class GameExecutor {
             /* 1. set the turn (who plays) */
             setTurn();
 
-            /* 2. print current turn (who plays)*/
+            /* 2. print current turn (who plays) */
             printTurn();
 
-            /* 3. execute turn according to player*/
+            /* 3. execute turn according to player */
             playByTurn();
 
             /* 4. print current board status */
@@ -30,7 +30,7 @@ public class GameExecutor {
             result = board.getGameResult();
         }
 
-        /* 6. return results*/
+        /* 6. return results */
         return new TicTacToeResult(result, 56494);
     }
 
