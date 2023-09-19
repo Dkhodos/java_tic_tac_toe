@@ -96,15 +96,12 @@ public class MiniMaxAlgorithmTest {
     private BoardNode getBestAIMove(GameBoard gameBoard) {
         List<BoardNode> emptySpots = gameBoard.getEmptyPositions();
 
-        // start with AI player move
-        BoardPlayer player = BoardPlayer.AI;
-
         // best score start at lower score possible
         int bestScore = Integer.MIN_VALUE;
         BoardNode bestMove = null;
 
         for (BoardNode node : emptySpots) {
-            gameBoard.makeMove(node, player);
+            gameBoard.makeMove(node, BoardPlayer.AI);
             int score = miniMax.minimax(gameBoard, node);
             gameBoard.clearNode(node);
 
@@ -112,14 +109,8 @@ public class MiniMaxAlgorithmTest {
                 bestScore = score;
                 bestMove = node;
             }
-
-            player = choosePlayer(player);
         }
 
         return bestMove;
-    }
-
-    private BoardPlayer choosePlayer(BoardPlayer current){
-        return current == BoardPlayer.USER ? BoardPlayer.AI : BoardPlayer.USER;
     }
 }

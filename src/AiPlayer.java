@@ -32,16 +32,12 @@ public class AiPlayer extends TicTacToePlayer{
     public BoardNode doBestMove(List<BoardNode> emptySpots) {
         logger.debug("Doing best move");
 
-        // start with AI player move
-        BoardPlayer player =  BoardPlayer.AI;
-
         // best score start at lower score possible
         int bestScore = Integer.MIN_VALUE;
         BoardNode bestMove = null;
 
         for (BoardNode node : emptySpots){
-
-            gameBoard.makeMove(node, player);
+            gameBoard.makeMove(node, BoardPlayer.AI);
             int score = minimax.minimax(gameBoard, node);
             gameBoard.clearNode(node);
 
@@ -49,8 +45,6 @@ public class AiPlayer extends TicTacToePlayer{
                 bestScore = score;
                 bestMove = node;
             }
-
-            player = choosePlayer(player);
         }
 
         if(bestMove != null){
@@ -62,10 +56,6 @@ public class AiPlayer extends TicTacToePlayer{
 
     public int getVisitedNodesCount(){
         return minimax.getVisitedNodesCount();
-    }
-
-    private BoardPlayer choosePlayer(BoardPlayer current){
-        return current == BoardPlayer.USER ? BoardPlayer.AI : BoardPlayer.USER;
     }
 
     private boolean isFirstMove(List<BoardNode> emptySpots){
