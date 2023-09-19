@@ -103,7 +103,7 @@ public class MiniMaxAlgorithmTest {
         for (BoardNode node : emptySpots) {
             gameBoard.makeMove(node, BoardPlayer.AI);
             int score = miniMax.minimax(gameBoard, node);
-            gameBoard.clearNode(node);
+            gameBoard.resetNodePlayer(node);
 
             if(score > bestScore) {
                 bestScore = score;

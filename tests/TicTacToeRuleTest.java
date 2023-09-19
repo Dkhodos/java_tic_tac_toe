@@ -31,7 +31,7 @@ public class TicTacToeRuleTest {
     @Test
     public void testUserWinsInRow() {
         for (int j = 0; j < BOARD_SIZE; j++) {
-            board[2][j].setState(BoardPlayer.USER);
+            board[2][j].setPlayer(BoardPlayer.USER);
             emptyNodes.remove(board[2][j]);
         }
         BoardNode lastPlayedNode = board[2][BOARD_SIZE - 1];
@@ -43,7 +43,7 @@ public class TicTacToeRuleTest {
     @Test
     public void testUserWinsInColumn() {
         for (int i = 0; i < BOARD_SIZE; i++) {
-            board[i][2].setState(BoardPlayer.USER);
+            board[i][2].setPlayer(BoardPlayer.USER);
             emptyNodes.remove(board[i][2]);
         }
         BoardNode lastPlayedNode = board[BOARD_SIZE - 1][2];
@@ -55,7 +55,7 @@ public class TicTacToeRuleTest {
     @Test
     public void testUserWinsInLeftDiagonal() {
         for (int i = 0; i < BOARD_SIZE; i++) {
-            board[i][i].setState(BoardPlayer.USER);
+            board[i][i].setPlayer(BoardPlayer.USER);
             emptyNodes.remove(board[i][i]);
         }
         BoardNode lastPlayedNode = board[BOARD_SIZE - 1][BOARD_SIZE - 1];
@@ -67,7 +67,7 @@ public class TicTacToeRuleTest {
     @Test
     public void testUserWinsInRightDiagonal() {
         for (int i = 0; i < BOARD_SIZE; i++) {
-            board[i][BOARD_SIZE - 1 - i].setState(BoardPlayer.USER);
+            board[i][BOARD_SIZE - 1 - i].setPlayer(BoardPlayer.USER);
             emptyNodes.remove(board[i][BOARD_SIZE - 1 - i]);
         }
         BoardNode lastPlayedNode = board[BOARD_SIZE - 1][0];
@@ -79,7 +79,7 @@ public class TicTacToeRuleTest {
     @Test
     public void testAIWinsInRow() {
         for (int j = 0; j < BOARD_SIZE; j++) {
-            board[1][j].setState(BoardPlayer.AI);
+            board[1][j].setPlayer(BoardPlayer.AI);
             emptyNodes.remove(board[1][j]);
         }
         BoardNode lastPlayedNode = board[1][BOARD_SIZE - 1];
@@ -91,7 +91,7 @@ public class TicTacToeRuleTest {
     @Test
     public void testAIWinsInColumn() {
         for (int i = 0; i < BOARD_SIZE; i++) {
-            board[i][1].setState(BoardPlayer.AI);
+            board[i][1].setPlayer(BoardPlayer.AI);
             emptyNodes.remove(board[i][1]);
         }
         BoardNode lastPlayedNode = board[BOARD_SIZE - 1][1];
@@ -103,7 +103,7 @@ public class TicTacToeRuleTest {
     @Test
     public void testAIWinsInLeftDiagonal() {
         for (int i = 0; i < BOARD_SIZE; i++) {
-            board[i][i].setState(BoardPlayer.AI);
+            board[i][i].setPlayer(BoardPlayer.AI);
             emptyNodes.remove(board[i][i]);
         }
         BoardNode lastPlayedNode = board[BOARD_SIZE - 1][BOARD_SIZE - 1];
@@ -115,7 +115,7 @@ public class TicTacToeRuleTest {
     @Test
     public void testAIWinsInRightDiagonal() {
         for (int i = 0; i < BOARD_SIZE; i++) {
-            board[i][BOARD_SIZE - 1 - i].setState(BoardPlayer.AI);
+            board[i][BOARD_SIZE - 1 - i].setPlayer(BoardPlayer.AI);
             emptyNodes.remove(board[i][BOARD_SIZE - 1 - i]);
         }
         BoardNode lastPlayedNode = board[BOARD_SIZE - 1][0];
@@ -136,15 +136,15 @@ public class TicTacToeRuleTest {
             for (int j = 0; j < BOARD_SIZE; j++) {
                 if (i % 2 == 0) {  // Even rows
                     if (j == BOARD_SIZE - 1) {
-                        board[i][j].setState(BoardPlayer.AI);
+                        board[i][j].setPlayer(BoardPlayer.AI);
                     } else {
-                        board[i][j].setState(BoardPlayer.USER);
+                        board[i][j].setPlayer(BoardPlayer.USER);
                     }
                 } else {  // Odd rows
                     if (j == BOARD_SIZE - 1) {
-                        board[i][j].setState(BoardPlayer.USER);
+                        board[i][j].setPlayer(BoardPlayer.USER);
                     } else {
-                        board[i][j].setState(BoardPlayer.AI);
+                        board[i][j].setPlayer(BoardPlayer.AI);
                     }
                 }
                 emptyNodes.remove(board[i][j]);
@@ -159,7 +159,7 @@ public class TicTacToeRuleTest {
     @Test
     public void testUndetermined() {
         BoardNode lastPlayedNode = board[0][0];
-        lastPlayedNode.setState(BoardPlayer.USER);
+        lastPlayedNode.setPlayer(BoardPlayer.USER);
         emptyNodes.remove(lastPlayedNode);
         addDummyMovesToMeetMinimum();
 
@@ -175,7 +175,7 @@ public class TicTacToeRuleTest {
         for (int i = 0; i < BOARD_SIZE && movesAdded < dummyMovesNeeded; i++) {
             for (int j = 0; j < BOARD_SIZE && movesAdded < dummyMovesNeeded; j++) {
                 if (board[i][j].getPlayer() == BoardPlayer.EMPTY) {
-                    board[i][j].setState(BoardPlayer.AI);
+                    board[i][j].setPlayer(BoardPlayer.AI);
                     emptyNodes.remove(board[i][j]);
                     movesAdded++;
                 }

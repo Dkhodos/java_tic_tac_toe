@@ -74,7 +74,7 @@ public class MiniMaxAlgorithm {
             int currentScore = performMinimax(gameBoard, node, !isMaximizing, depth + 1, alpha, beta);
 
             // Revert the move to explore other possibilities.
-            gameBoard.clearNode(node);
+            gameBoard.resetNodePlayer(node);
 
             // Update the best score and alpha/beta values based on whether we are maximizing or minimizing.
             if(isMaximizing){
