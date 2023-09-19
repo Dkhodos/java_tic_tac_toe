@@ -14,11 +14,11 @@ Tic Tac Toe is a well-known game where two players, often denoted as 'X' and 'O'
 
 ## Features:
 
-- **Minimax Algorithm with Memoization**: The core decision-making logic for the AI player. The algorithm looks ahead at all possible moves, evaluates them, and chooses the best one.
+- **Minimax Algorithm with Alpha-Beta Pruning and Memoization**: The core decision-making logic for the AI player. The algorithm looks ahead at all possible moves, evaluates them, and chooses the best one. Alpha-beta pruning helps in optimizing the search process by cutting off unnecessary branches in the computation tree.
 - **Dynamic Board Size**: The game is adaptable to various board sizes, making it extensible beyond the traditional 3x3 grid.
 - **Optimized Game Result Determination**: Instead of checking the entire board after every move, the game checks around the last move, reducing unnecessary computations.
 - **State Hashing**: To speed up the Minimax algorithm, the game state is hashed and stored, avoiding redundant evaluations.
-
+- 
 ## Classes and Components:
 
 - **MiniMaxAlgorithm**: The heart of the AI's decision-making process. It uses the Minimax algorithm to evaluate potential moves and decide on the best possible outcome.
@@ -27,33 +27,45 @@ Tic Tac Toe is a well-known game where two players, often denoted as 'X' and 'O'
 - **BoardNode**: Represents a cell on the game board. Contains information about its current state (empty, 'X', or 'O').
 - **Settings**: Contains global settings for the game, such as the board size, which can be adjusted as needed.
 
-## How This Works ?
-
 1. **Setting Up the Board**:
-    - The game initializes a board using the `GameBoard` class, which sets up a grid of a specified size with each cell represented as a `BoardNode`.
+   - The game initializes a board using the `GameBoard` class, which sets up a grid of a specified size with each cell represented as a `BoardNode`.
 
 2. **User Moves**:
-    - The user is prompted to make a move based on their input. The game displays the board's current state after each move, allowing the user to plan their next move strategically.
+   - The user is prompted to make a move based on their input. The game displays the board's current state after each move, allowing the user to plan their next move strategically.
 
 3. **AI Moves**:
-    - For the AI's first move, it randomly selects a position on the board.
-    - For all subsequent moves, the AI uses the `minimax` function from the `MiniMaxAlgorithm` class. This algorithm evaluates possible moves and selects the best one based on a recursive evaluation of potential outcomes.
+   - For the AI's first move, it randomly selects a position on the board.
+   - For all subsequent moves, the AI uses the `minimax` function from the `MiniMaxAlgorithm` class. This algorithm, enhanced with alpha-beta pruning, evaluates possible moves and selects the best one based on a recursive evaluation of potential outcomes. The pruning technique significantly reduces the number of board states the algorithm needs to evaluate.
 
 4. **Determining the Winner**:
-    - After every move, the `TicTacToeRule` class checks the game's state using the `determineWinner` method. Instead of evaluating the entire board, it checks around the last move made to optimize performance.
+   - After every move, the `TicTacToeRule` class checks the game's state using the `determineWinner` method. Instead of evaluating the entire board, it checks around the last move made to optimize performance.
 
 5. **Optimization**:
-    - The Minimax algorithm's performance is enhanced using memoization. Previous board states and their evaluations are stored in the `visitedNodes` map to prevent re-evaluation.
-
+   - The Minimax algorithm's performance is enhanced using both memoization and alpha-beta pruning. Previous board states and their evaluations are stored in the `visitedNodes` map to prevent re-evaluation. The alpha-beta pruning ensures that the algorithm only evaluates branches that have the potential to provide a better outcome than the current known best.
 
 ## Usage:
 
 ### Main Program:
 
-- Compile and run the `Main` class to start the game.
-- The game will prompt the user for moves and display the board's current state after each move.
-- The AI opponent, powered by the Minimax algorithm, will then make its move.
+- The Main program expects specified game arguments to run the simulation.
 
+  #### In Intelij IDE:
+- Use the stock run functionality.
+
+  #### In Eclipse IDE:
+
+- Use the stock run functionality.
+
+  #### In shell (mac/ linux):
+
+- Run:
+  ```shell
+  chmod +x compile_and_run.sh
+  ```
+- Then, run:
+  ```shell
+  ./compile_and_run.sh
+  ```
 ## Tests:
 
 ### **MiniMaxAlgorithmTest**:

@@ -26,20 +26,24 @@ public class MiniMaxAlgorithm {
      * @return The best possible score for the given board state.
      */
     public int minimax(GameBoard gameBoard, BoardNode lastMove){
-        return performMinimax(gameBoard, lastMove, false, 0);
+        return performMinimax(gameBoard, lastMove, false, 0, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 
     /**
-     * Recursively computes the best score for the given board state using the MiniMax algorithm,
-     * taking into account the depth of the game tree to prioritize shorter paths to victory.
+     * Recursively computes the best score for the given board state using the MiniMax algorithm with alpha-beta pruning.
+     * The algorithm considers the depth of the game tree to prioritize shorter paths to victory.
+     * Alpha-beta pruning is used to cut off branches in the search tree, optimizing the search process.
      *
      * @param gameBoard The current game board.
      * @param lastMove The last move made on the board.
      * @param isMaximizing {@code true} if the current player is trying to maximize the score, {@code false} otherwise.
      * @param depth The current depth of the game tree.
+     * @param alpha The best score that the maximizing player is assured of.
+     * @param beta The best score that the minimizing player is assured of.
      * @return The best possible score for the given board state.
      */
-    private int performMinimax(GameBoard gameBoard, BoardNode lastMove, boolean isMaximizing, int depth){
+    private int performMinimax(GameBoard gameBoard, BoardNode lastMove, boolean isMaximizing, int depth,
+                               int alpha, int beta){
         // Check if the last move resulted in a game-ending state (win/loss/draw).
         GameResult result = gameBoard.getGameResult(lastMove);
         if(result != GameResult.UNDETERMINED){
@@ -66,13 +70,24 @@ public class MiniMaxAlgorithm {
             gameBoard.makeMove(node, isMaximizing ? BoardPlayer.AI : BoardPlayer.USER);
 
             // Recursively compute the score for this move.
-            int currentScore = performMinimax(gameBoard, node, !isMaximizing, depth + 1);
+            int currentScore = performMinimax(gameBoard, node, !isMaximizing, depth + 1, alpha, beta);
 
             // Revert the move to explore other possibilities.
             gameBoard.clearNode(node);
 
-            // Update the best score based on whether we are maximizing or minimizing.
-            bestScore = isMaximizing ? max(currentScore, bestScore) : min(currentScore, bestScore);
+            // Update the best score and alpha/beta values based on whether we are maximizing or minimizing.
+            if(isMaximizing){
+                bestScore = max(currentScore, bestScore);
+                alpha = max(alpha, bestScore);
+            } else {
+                bestScore = min(currentScore, bestScore);
+                beta = min(beta, bestScore);
+            }
+
+            // Alpha-beta pruning: if alpha is greater than or equal to beta, break out of the loop.
+            if (alpha >= beta) {
+                break;
+            }
         }
 
         // Store the computed best score for this board state to avoid redundant calculations in the future.

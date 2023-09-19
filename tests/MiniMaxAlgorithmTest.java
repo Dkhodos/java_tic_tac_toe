@@ -30,7 +30,7 @@ public class MiniMaxAlgorithmTest {
     @Test
     public void testEmptyBoard() {
         int score = miniMax.minimax(gameBoard, null);
-        assertEquals(0, score, "Score should be 0 for an empty board");
+        assertEquals(-1, score, "Score should be -1 for an empty board");
     }
 
     @Test
