@@ -7,16 +7,24 @@ class GameBoard {
     private static final String NODE_SEPARATOR = " ";
     private static final String ROW_SEPARATOR = "\n";
 
-    private BoardNode[][] board;
-    private final TicTacToeRule ticTacToeRule;
+    private final BoardNode[][] board;
+    private final TicTacToeRule ticTacToeRule = new TicTacToeRule();
 
     GameBoard() {
-        initBoard();
-        ticTacToeRule = new TicTacToeRule();
+        board = new BoardNode[Settings.BOARD_SIZE][Settings.BOARD_SIZE];
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                board[i][j] = new BoardNode(i, j);
+            }
+        }
     }
 
     public int size() {
         return board.length * board.length;
+    }
+
+    public int length(){
+        return board.length;
     }
 
     @Override
@@ -70,14 +78,5 @@ class GameBoard {
 
     public GameResult getGameResult(BoardNode lastMove) {
         return ticTacToeRule.determineWinner(board, getEmptyPositions(), lastMove);
-    }
-
-    private void initBoard() {
-        board = new BoardNode[Settings.BOARD_SIZE][Settings.BOARD_SIZE];
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                board[i][j] = new BoardNode(i, j);
-            }
-        }
     }
 }

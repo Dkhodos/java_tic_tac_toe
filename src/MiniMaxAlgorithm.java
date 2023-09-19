@@ -6,30 +6,44 @@ import static java.lang.Math.*;
 /**
  * The {@code MiniMaxAlgorithm} class implements the MiniMax algorithm to determine the best
  * move for the AI in a Tic Tac Toe game. It uses a memoization technique to store previously
- * computed board states and their results to optimize the search.
+ * computed board states and their results to optimize the search. The algorithm also prioritizes
+ * the shortest path to victory by considering the depth of the game tree during evaluation.
  */
 public class MiniMaxAlgorithm {
 
     /**
      * A map to store previously computed board states (represented as Strings)
-     * and their associated best scores. This memoization helps in reducing
+     * and their associated best scores. This memoization reduces
      * redundant calculations, optimizing the search process.
      */
     private final Map<String, Integer> visitedNodes = new HashMap<>();
 
     /**
-     * Determines the best score for the given board state using the MiniMax algorithm.
+     * Initiates the MiniMax algorithm to compute the best score for the given board state.
+     *
+     * @param gameBoard The current game board.
+     * @param lastMove The last move made on the board.
+     * @return The best possible score for the given board state.
+     */
+    public int minimax(GameBoard gameBoard, BoardNode lastMove){
+        return performMinimax(gameBoard, lastMove, false, 0);
+    }
+
+    /**
+     * Recursively computes the best score for the given board state using the MiniMax algorithm,
+     * taking into account the depth of the game tree to prioritize shorter paths to victory.
      *
      * @param gameBoard The current game board.
      * @param lastMove The last move made on the board.
      * @param isMaximizing {@code true} if the current player is trying to maximize the score, {@code false} otherwise.
+     * @param depth The current depth of the game tree.
      * @return The best possible score for the given board state.
      */
-    public int minimax(GameBoard gameBoard, BoardNode lastMove, boolean isMaximizing){
+    private int performMinimax(GameBoard gameBoard, BoardNode lastMove, boolean isMaximizing, int depth){
         // Check if the last move resulted in a game-ending state (win/loss/draw).
         GameResult result = gameBoard.getGameResult(lastMove);
         if(result != GameResult.UNDETERMINED){
-            return getBoardScore(result);
+            return getBoardScore(result, depth);
         }
 
         // Convert the current board state to its string representation.
@@ -52,7 +66,7 @@ public class MiniMaxAlgorithm {
             gameBoard.makeMove(node, isMaximizing ? BoardPlayer.AI : BoardPlayer.USER);
 
             // Recursively compute the score for this move.
-            int currentScore = minimax(gameBoard, node, !isMaximizing);
+            int currentScore = performMinimax(gameBoard, node, !isMaximizing, depth + 1);
 
             // Revert the move to explore other possibilities.
             gameBoard.clearNode(node);
@@ -77,16 +91,19 @@ public class MiniMaxAlgorithm {
     }
 
     /**
-     * Maps the game result to its respective score.
+     * Maps the game result to its respective score, adjusting the score based on the depth
+     * of the game tree to prioritize shorter paths to victory or delay losses.
      *
      * @param result The game outcome (AI_WINS, USER_WINS, DRAW, or UNDETERMINED).
+     * @param depth The current depth of the game tree.
      * @return The score associated with the game outcome.
      */
-    private int getBoardScore(GameResult result){
+    private int getBoardScore(GameResult result, int depth){
         return switch (result) {
-            case UNDETERMINED, DRAW -> 0;
-            case AI_WINS -> 1;
-            case USER_WINS -> -1;
+            case DRAW -> 0;
+            case AI_WINS -> 10 - depth;  // AI should win as soon as possible
+            case USER_WINS -> depth - 10;  // AI should prevent USER from winning as long as possible
+            default -> throw new IllegalStateException("Unexpected value: " + result);
         };
     }
 }

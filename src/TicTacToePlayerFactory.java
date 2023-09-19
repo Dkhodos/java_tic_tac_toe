@@ -15,7 +15,7 @@ public class TicTacToePlayerFactory {
         return playerTurn == BoardPlayer.USER ? "Your turn!" : "AI plays...";
     }
 
-    public int getAIVisitedNodeCount(){
+    public int getAIVisitedNodesCount(){
         return aiPlayer.getVisitedNodesCount();
     }
 

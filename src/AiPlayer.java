@@ -42,7 +42,7 @@ public class AiPlayer extends TicTacToePlayer{
         for (BoardNode node : emptySpots){
 
             gameBoard.makeMove(node, player);
-            int score = minimax.minimax(gameBoard, node, false);
+            int score = minimax.minimax(gameBoard, node);
             gameBoard.clearNode(node);
 
             if(score > bestScore){

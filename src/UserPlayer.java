@@ -14,11 +14,8 @@ public class UserPlayer extends TicTacToePlayer{
         int bound = Settings.BOARD_SIZE - 1;
 
         while (true){
-            System.out.printf((GET_X_PROMPT_TEMPLATE) + "%n", bound);
-            int x = scanner.nextInt();
-
-            System.out.printf((GET_Y_PROMPT_TEMPLATE) + "%n", bound);
-            int y = scanner.nextInt();
+            int x = getUserMove(String.format(GET_X_PROMPT_TEMPLATE, bound));
+            int y = getUserMove(String.format(GET_Y_PROMPT_TEMPLATE, bound));
 
             if(gameBoard.isNodeEmpty(x, y)){
                 return gameBoard.makeMove(x, y, BoardPlayer.USER);
@@ -26,5 +23,20 @@ public class UserPlayer extends TicTacToePlayer{
 
             System.out.println("Invalid move, this is area already occupied!");
         }
+    }
+
+    private int getUserMove(String prompt){
+        while (true){
+            System.out.println(prompt);
+            int input = scanner.nextInt();
+            if(isMoveInBound(input)){
+                return input;
+            }
+            System.out.println("Invalid input, value "+ input + " is outside of the game board!");
+        }
+    }
+
+    private boolean isMoveInBound(int input){
+        return input >= 0 && input < gameBoard.length();
     }
 }

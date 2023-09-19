@@ -1,9 +1,7 @@
-import java.util.Objects;
-
 public class BoardNode{
     private final int i;
     private final int j;
-    private BoardPlayer player= BoardPlayer.EMPTY;
+    private BoardPlayer player = BoardPlayer.EMPTY;
     public BoardNode(int i, int j){
         this.i = i;
         this.j = j;
@@ -35,10 +33,5 @@ public class BoardNode{
 
     public void clear(){
         player = BoardPlayer.EMPTY;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(i, j);
     }
 }

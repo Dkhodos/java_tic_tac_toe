@@ -31,7 +31,7 @@ public class GameExecutor {
         }
 
         /* 6. return results */
-        return new TicTacToeResult(result, currentPlayer.getAIVisitedNodeCount());
+        return new TicTacToeResult(result, currentPlayer.getAIVisitedNodesCount());
     }
 
     private void setTurn(){
