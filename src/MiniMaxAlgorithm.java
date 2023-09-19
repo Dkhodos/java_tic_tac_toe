@@ -20,6 +20,7 @@ public class MiniMaxAlgorithm {
 
     /**
      * Initiates the MiniMax algorithm to compute the best score for the given board state.
+     * isMaximizing=false, its the player move we will analyze now (AI - maximizing, player minimizing)
      *
      * @param gameBoard The current game board.
      * @param lastMove The last move made on the board.
