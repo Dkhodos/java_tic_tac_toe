@@ -75,9 +75,12 @@ public class AiPlayer extends TicTacToePlayer {
             int score = minimax.minimax(gameBoard, node);
             gameBoard.resetNodePlayer(node);
 
+            logger.debug("Move " + node + " got a score of " + score);
+
             if (score > bestScore) {
                 bestScore = score;
                 bestMove = node;
+                logger.debug("Best move changed to " + node + " with score of " + bestScore);
             }
         }
 

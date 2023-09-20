@@ -85,4 +85,12 @@ public class BoardNode {
     public void clearPlayer() {
         player = BoardPlayer.EMPTY;
     }
+
+    @Override
+    public String toString() {
+        if(isEmpty()){
+            return "(" + i + "," + j + ")";
+        }
+        return "(" + i + "," + j + "," +getPlayerSymbol() +")";
+    }
 }
