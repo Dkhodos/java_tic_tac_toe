@@ -1,6 +1,6 @@
 ## Tic Tac Toe Game
 
-Tic Tac Toe is a well-known game where two players, often denoted as 'X' and 'O', take turns marking spaces in a 4x4 grid. The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row is the winner. This implementation of the Tic Tac Toe game provides an AI opponent, using the Minimax algorithm with memoization, to make it a challenging game for the user.
+Tic Tac Toe is a well-known game where two players, often denoted as 'X' and 'O', take turns marking spaces in a 4x4 grid. The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row is the winner. This implementation of the Tic Tac Toe game provides an AI opponent, using the Minimax algorithm to make it a challenging game for the user.
 - Full assignment can be found [here](/static/assigment.pdf).
 
 ## Project Structure:
@@ -14,7 +14,7 @@ Tic Tac Toe is a well-known game where two players, often denoted as 'X' and 'O'
 
 ## Features:
 
-- **Minimax Algorithm with Alpha-Beta Pruning and Memoization**: The core decision-making logic for the AI player. The algorithm looks ahead at all possible moves, evaluates them, and chooses the best one. Alpha-beta pruning helps in optimizing the search process by cutting off unnecessary branches in the computation tree.
+- **Minimax Algorithm with Alpha-Beta Pruning**: The core decision-making logic for the AI player. The algorithm looks ahead at all possible moves, evaluates them, and chooses the best one. Alpha-beta pruning helps in optimizing the search process by cutting off unnecessary branches in the computation tree.
 - **Dynamic Board Size**: The game is adaptable to various board sizes, making it extensible beyond the traditional 3x3 grid.
 - **Optimized Game Result Determination**: Instead of checking the entire board after every move, the game checks around the last move, reducing unnecessary computations.
 - **State Hashing**: To speed up the Minimax algorithm, the game state is hashed and stored, avoiding redundant evaluations.
@@ -41,7 +41,7 @@ Tic Tac Toe is a well-known game where two players, often denoted as 'X' and 'O'
    - After every move, the `TicTacToeRule` class checks the game's state using the `determineWinner` method. Instead of evaluating the entire board, it checks around the last move made to optimize performance.
 
 5. **Optimization**:
-   - The Minimax algorithm's performance is enhanced using both memoization and alpha-beta pruning. Previous board states and their evaluations are stored in the `visitedNodes` map to prevent re-evaluation. The alpha-beta pruning ensures that the algorithm only evaluates branches that have the potential to provide a better outcome than the current known best.
+   - The Minimax algorithm's performance is enhanced with alpha-beta pruning. Previous board states and their evaluations are stored in the `visitedNodes` map to prevent re-evaluation. The alpha-beta pruning ensures that the algorithm only evaluates branches that have the potential to provide a better outcome than the current known best.
 
 ## Usage:
 

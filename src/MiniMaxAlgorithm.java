@@ -1,22 +1,19 @@
+import java.util.HashSet;
 import java.util.List;
-import java.util.HashMap;
-import java.util.Map;
 import static java.lang.Math.*;
 
 /**
  * The {@code MiniMaxAlgorithm} class implements the MiniMax algorithm to determine the best
- * move for the AI in a Tic Tac Toe game. It uses a memoization technique to store previously
- * computed board states and their results to optimize the search. The algorithm also prioritizes
+ * move for the AI in a Tic Tac Toe game. The algorithm prioritizes
  * the shortest path to victory by considering the depth of the game tree during evaluation.
+ * Also, Alpha-beta pruning is used to cut off branches in the search tree, optimizing the search process.
  */
 public class MiniMaxAlgorithm {
 
     /**
-     * A map to store previously computed board states (represented as Strings)
-     * and their associated best scores. This memoization reduces
-     * redundant calculations, optimizing the search process.
+     * A set to store previously computed board states (represented as Strings), to count the visited nodes
      */
-    private final Map<String, Integer> visitedNodes = new HashMap<>();
+    private final HashSet<String> visitedNodes = new HashSet<>();
 
     /**
      * Initiates the MiniMax algorithm to compute the best score for the given board state.
@@ -51,14 +48,6 @@ public class MiniMaxAlgorithm {
             return getBoardScore(result, depth);
         }
 
-        // Convert the current board state to its string representation.
-        String boardState = gameBoard.toHash();
-
-        // If this board state has been previously computed, return the stored result.
-        if (visitedNodes.containsKey(boardState)) {
-            return visitedNodes.get(boardState);
-        }
-
         // Initialize the best score based on whether the current player is maximizing or minimizing.
         int bestScore = isMaximizing ? Integer.MIN_VALUE : Integer.MAX_VALUE;
 
@@ -72,6 +61,9 @@ public class MiniMaxAlgorithm {
 
             // Recursively compute the score for this move.
             int currentScore = performMinimax(gameBoard, node, !isMaximizing, depth + 1, alpha, beta);
+
+            // Store the visited node.
+            visitedNodes.add(gameBoard.toHash());
 
             // Revert the move to explore other possibilities.
             gameBoard.resetNodePlayer(node);
@@ -90,9 +82,6 @@ public class MiniMaxAlgorithm {
                 break;
             }
         }
-
-        // Store the computed best score for this board state to avoid redundant calculations in the future.
-        visitedNodes.put(boardState, bestScore);
 
         return bestScore;
     }
